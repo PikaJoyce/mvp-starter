@@ -5,24 +5,21 @@ class SelectSub extends React.Component {
     super(props)
     this.state = {
       memeType: '',
-      phoneNumber: '+14159921199'
+      phoneNumber: '+14159921199',
+      message: ''
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.sendTo = this.sendTo.bind(this);
   }
 
   onChange(e) {
-    console.log('this search value', e.target.value)
-    let memeType = e.target.value
+    let name = e.target.name
+    let value = e.target.value
+    // console.log('this search value', value)
+    // console.log('this search name', name)
     this.setState({
-      memeType
+      [name]: value
     })
-  }
-
-  sendTo(e) {
-    let phoneNumber = e.target.value
-    this.setState({ phoneNumber })
   }
 
   onSubmit(e) {
@@ -34,14 +31,20 @@ class SelectSub extends React.Component {
   render() {
     return (
       <form onSubmit={e => this.onSubmit(e)}>
-        <label> Meme Type:
-          <input type='text' onChange={e => this.onChange(e)} >
+        <label> Meme Type :
+          <input type='text' name='memeType' onChange={e => this.onChange(e)} >
           </input>
         </label>
         &nbsp;
-        <label> Send meme to :
+        <label>
+          Send a message :
           &nbsp;
-          <select onChange={e => this.sendTo(e)}>
+          <input type='text' name='message' onChange={e => this.onChange(e)}></input>
+        </label>
+        &nbsp;
+        <label> Send meme to :
+      &nbsp;
+          <select name='phoneNumber' onChange={e => this.onChange(e)}>
             <option value='+14159921199'>Joyce</option>
           </select>
         </label>

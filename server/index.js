@@ -22,6 +22,7 @@ app.post('/memes', (req, res) => {
   console.log('server req', req.body)
   let search = req.body.memeType
   let phoneNumber = req.body.phoneNumber
+  let message = req.body.message
   var meme = {
     memeType: search,
     phoneNumber: phoneNumber
@@ -37,7 +38,7 @@ app.post('/memes', (req, res) => {
       console.log('send this to db: ', meme)
       client.messages
         .create({
-          body: 'A meme a day keeps the doctor awei',
+          body: message,
           from: '+14157459363',
           mediaUrl: imgUrl,
           to: phoneNumber

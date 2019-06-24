@@ -12,7 +12,7 @@ class App extends React.Component {
 
 
   setSubreddit(memeInfo) {
-    // console.log(memeInfo)
+    //console.log(memeInfo)
     axios.post('/memes', memeInfo)
       .then(res => {
         console.log('response in client', res.data)

@@ -1,31 +1,55 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+const mongoURI = 'mongodb://localhost/memes';
+mongoose.connect(mongoURI, { useMongoClient: true });
 
 var db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', function () {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
+db.once('open', function () {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+// var itemSchema = mongoose.Schema({
+//   quantity: Number,
+//   description: String
+// });
+
+// var Item = mongoose.model('Item', itemSchema);
+
+// var selectAll = function (callback) {
+//   BobaShop.find({}, function (err, menuItems) {
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, menuItems);
+//     }
+//   });
+// };
+
+var memeSchema = mongoose.Schema({
+  memeType: String,
+  phoneNumber: String,
+  imgUrl: String,
+  message: String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Meme = mongoose.model('Meme', memeSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
+module.exports.addMeme = (data, cb) => {
+  console.log("about to save meme to db", data)
+  let meme = new Meme(data);
+
+  meme.save(meme, (err, result) => {
+    if (err) {
+      console.log("An error as occured posting to db");
+      cb(err, null)
     } else {
-      callback(null, items);
+      console.log("Successfully posted to db: ", result);
+      cb(null, result)
     }
-  });
-};
+  })
+}
 
-module.exports.selectAll = selectAll;

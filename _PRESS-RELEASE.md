@@ -17,28 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  Memerator
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  An app that allows users to randomly generate a meme from the popular website, Reddit. 
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Finding memes on the way to work is a boring task, I needed to find a way in order to quickly get memes more efficiently without spending too much time.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  A simple application that I can use to generate memes without having to scroll through many pages of reddit for good memes.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  Finding high quality memes for your posterity
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  npm install
+  npm start
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  " I love looking at memes without having to go through the trouble of finding them on reddit!"
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.

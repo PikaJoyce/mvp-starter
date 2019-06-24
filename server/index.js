@@ -18,17 +18,36 @@ app.use(bodyParser.json());
 
 var randomIdx = () => (Math.floor(Math.random() * (13 - 1) + 1))
 
+app.get('/phoneNumber', (req, res) => {
+  db.getPhonenumbers((err, result) => {
+    if (err) {
+      console.log('cannot get numbers', err)
+      res.status(403).send(err)
+    } else {
+      console.log('got info from database', result)
+      res.status(200).send(result)
+    }
+  })
+})
 
-var phoneNumbers = {
-  // LIST OF VERIFIED PHONE NUMBERS
-  // This is a place holder so I don't reveal everyone's phone numbers to the rest of the world
-
-}
+app.post('/phoneNumber', (req, res) => {
+  console.log('phoneNumber info', req.body)
+  let info = req.body
+  db.addPhonenumber(info, (err, result) => {
+    if (err) {
+      console.log('unable to add numberv to server', err)
+      res.status(403).send('Unable to add to DB')
+    } else {
+      console.log('Wrote number to database', result)
+      res.status(200).send('Added to DB')
+    }
+  })
+})
 
 app.post('/memes', (req, res) => {
   console.log('server req', req.body)
   let search = req.body.memeType
-  let phoneNumber = phoneNumbers[req.body.phoneNumber]
+  let phoneNumber;
   let message = req.body.message
   var meme = {
     message: message,
@@ -36,6 +55,17 @@ app.post('/memes', (req, res) => {
     phoneNumber: phoneNumber
   }
   let imgUrl;
+
+  db.findOne({ name: req.body.phoneNumber }, (err, result) => {
+    if (err) {
+      console.log('cannot get numbers', err)
+    } else {
+      console.log('got info from database', result.phoneNumber)
+      meme.phoneNumber = result.phoneNumber
+      phoneNumber = result.phoneNumber
+    }
+  })
+
   getMemeUrls(search, apiKey, randomIdx(), randomIdx())
     .then(result => {
       imgUrl = result[randomIdx()]
@@ -53,19 +83,20 @@ app.post('/memes', (req, res) => {
         })
         .then(message => console.log('text sent', message.sid))
         .catch(err => console.log('cannot send message', err));
-
-      db.addMeme(meme, (err, result) => {
-        if (err) {
-          console.log('unable to add meme to server', err)
-        } else {
-          console.log('Wrote meme to database', result)
-        }
-      })
     })
     .catch(err => {
       res.status(400).send(err)
     })
 })
+
+// db.addMeme(meme, (err, result) => {
+//   if (err) {
+//     console.log('unable to add meme to server', err)
+//   } else {
+//     console.log('Wrote meme to database', result)
+//   }
+// })
+
 
 app.listen(3000, function () {
   console.log('listening on port 3000!');

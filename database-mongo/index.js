@@ -29,20 +29,42 @@ db.once('open', function () {
 //   });
 // };
 
-var memeSchema = mongoose.Schema({
-  memeType: String,
-  phoneNumber: String,
-  imgUrl: String,
-  message: String
+// var memeSchema = mongoose.Schema({
+//   memeType: String,
+//   phoneNumber: String,
+//   imgUrl: String,
+//   message: String
+// });
+
+// var Meme = mongoose.model('Meme', memeSchema);
+
+// module.exports.addMeme = (data, cb) => {
+//   console.log("about to save meme to db", data)
+//   let meme = new Meme(data);
+
+//   meme.save(meme, (err, result) => {
+//     if (err) {
+//       console.log("An error as occured posting to db");
+//       cb(err, null)
+//     } else {
+//       console.log("Successfully posted to db: ", result);
+//       cb(null, result)
+//     }
+//   })
+// }
+
+var phoneNumbersSchema = mongoose.Schema({
+  name: String,
+  phoneNumber: String
 });
 
-var Meme = mongoose.model('Meme', memeSchema);
+var PhoneNumber = mongoose.model('PhoneNumber', phoneNumbersSchema);
 
-module.exports.addMeme = (data, cb) => {
-  console.log("about to save meme to db", data)
-  let meme = new Meme(data);
+module.exports.addPhonenumber = (data, cb) => {
+  console.log("about to save phoneNumber to db", data)
+  let info = new PhoneNumber(data);
 
-  meme.save(meme, (err, result) => {
+  info.save(info, (err, result) => {
     if (err) {
       console.log("An error as occured posting to db");
       cb(err, null)
@@ -53,3 +75,26 @@ module.exports.addMeme = (data, cb) => {
   })
 }
 
+module.exports.getPhonenumbers = (cb) => {
+  PhoneNumber.find((err, docs) => {
+    if (err) {
+      console.log("An error has occured getting phonenumber info: ", err);
+      cb(err, null);
+    } else {
+      console.log("data in server! ", docs);
+      cb(null, docs);
+    }
+  })
+}
+
+module.exports.findOne = (name, cb) => {
+  PhoneNumber.findOne(name, (err, docs) => {
+    if (err) {
+      console.log("An error has occured getting phonenumber info: ", err);
+      cb(err, null);
+    } else {
+      console.log("data in db! ", docs);
+      cb(null, docs);
+    }
+  })
+}

@@ -5,7 +5,7 @@ class SelectSub extends React.Component {
     super(props)
     this.state = {
       memeType: '',
-      phoneNumber: '+14159921199',
+      phoneNumber: 'Joyce',
       message: ''
     }
     this.onChange = this.onChange.bind(this);
@@ -53,6 +53,7 @@ class SelectSub extends React.Component {
             <option value='Maia'>Maia</option>
             <option value='Dickson'>Dickson</option>
             <option value='Vinh'>Vinh</option>
+            <option value='Kenny'>Kenny</option>
           </select>
         </label>
         &nbsp;

@@ -18,12 +18,20 @@ app.use(bodyParser.json());
 
 var randomIdx = () => (Math.floor(Math.random() * (13 - 1) + 1))
 
+
+var phoneNumbers = {
+  // LIST OF VERIFIED PHONE NUMBERS
+  // This is a place holder so I don't reveal everyone's phone numbers to the rest of the world
+
+}
+
 app.post('/memes', (req, res) => {
   console.log('server req', req.body)
   let search = req.body.memeType
-  let phoneNumber = req.body.phoneNumber
+  let phoneNumber = phoneNumbers[req.body.phoneNumber]
   let message = req.body.message
   var meme = {
+    message: message,
     memeType: search,
     phoneNumber: phoneNumber
   }

@@ -32,6 +32,7 @@ class SelectSub extends React.Component {
     return (
       <form onSubmit={e => this.onSubmit(e)}>
         <label> Meme Type :
+          &nbsp;
           <input type='text' name='memeType' onChange={e => this.onChange(e)} >
           </input>
         </label>
@@ -45,7 +46,13 @@ class SelectSub extends React.Component {
         <label> Send meme to :
       &nbsp;
           <select name='phoneNumber' onChange={e => this.onChange(e)}>
-            <option value='+14159921199'>Joyce</option>
+            <option value='Joyce'>Joyce</option>
+            <option value='Jimmy'>Jimmy</option>
+            <option value='Winnie'>Winnie</option>
+            <option value='Greg'>Greg</option>
+            <option value='Maia'>Maia</option>
+            <option value='Dickson'>Dickson</option>
+            <option value='Vinh'>Vinh</option>
           </select>
         </label>
         &nbsp;

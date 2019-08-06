@@ -15,8 +15,6 @@ class SelectSub extends React.Component {
   onChange(e) {
     let name = e.target.name
     let value = e.target.value
-    // console.log('this search value', value)
-    // console.log('this search name', name)
     this.setState({
       [name]: value
     })
@@ -54,6 +52,7 @@ class SelectSub extends React.Component {
             <option value='Dickson'>Dickson</option>
             <option value='Vinh'>Vinh</option>
             <option value='Kenny'>Kenny</option>
+            <option value='Harrison'>Harrison</option>
           </select>
         </label>
         &nbsp;

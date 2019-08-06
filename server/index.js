@@ -18,17 +18,17 @@ app.use(bodyParser.json());
 
 var randomIdx = () => (Math.floor(Math.random() * (13 - 1) + 1))
 
-app.get('/phoneNumber', (req, res) => {
-  db.getPhonenumbers((err, result) => {
-    if (err) {
-      console.log('cannot get numbers', err)
-      res.status(403).send(err)
-    } else {
-      console.log('got info from database', result)
-      res.status(200).send(result)
-    }
-  })
-})
+// app.get('/phoneNumber', (req, res) => {
+//   db.getPhonenumbers((err, result) => {
+//     if (err) {
+//       console.log('cannot get numbers', err)
+//       res.status(403).send(err)
+//     } else {
+//       console.log('got info from database', result)
+//       res.status(200).send(result)
+//     }
+//   })
+// })
 
 app.post('/phoneNumber', (req, res) => {
   console.log('phoneNumber info', req.body)

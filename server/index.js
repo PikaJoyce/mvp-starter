@@ -11,24 +11,11 @@ const client = new twilio(auth.accountSid, auth.authToken);
 
 var app = express();
 
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
 
 app.use(bodyParser.json());
 
 var randomIdx = () => (Math.floor(Math.random() * (13 - 1) + 1))
-
-// app.get('/phoneNumber', (req, res) => {
-//   db.getPhonenumbers((err, result) => {
-//     if (err) {
-//       console.log('cannot get numbers', err)
-//       res.status(403).send(err)
-//     } else {
-//       console.log('got info from database', result)
-//       res.status(200).send(result)
-//     }
-//   })
-// })
 
 app.post('/phoneNumber', (req, res) => {
   console.log('phoneNumber info', req.body)
@@ -66,7 +53,8 @@ app.post('/memes', (req, res) => {
     }
   })
 
-  getMemeUrls(search, apiKey, randomIdx(), randomIdx())
+  console.log('about to get memes from api')
+  getMemeUrls(search, apiKey, randomIdx())
     .then(result => {
       imgUrl = result[randomIdx()]
       res.status(200).send(imgUrl)
@@ -88,14 +76,6 @@ app.post('/memes', (req, res) => {
       res.status(400).send(err)
     })
 })
-
-// db.addMeme(meme, (err, result) => {
-//   if (err) {
-//     console.log('unable to add meme to server', err)
-//   } else {
-//     console.log('Wrote meme to database', result)
-//   }
-// })
 
 
 app.listen(3000, function () {
